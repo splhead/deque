@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=deque
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/deque
+CND_ARTIFACT_NAME_Debug=arraydeque
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/arraydeque
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=deque.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/deque.tar
+CND_PACKAGE_NAME_Debug=arraydeque.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/arraydeque.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
-CND_ARTIFACT_NAME_Release=deque
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/deque
+CND_ARTIFACT_NAME_Release=arraydeque
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/arraydeque
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
-CND_PACKAGE_NAME_Release=deque.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/deque.tar
+CND_PACKAGE_NAME_Release=arraydeque.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/arraydeque.tar
 #
 # include compiler specific variables
 #

@@ -1,4 +1,3 @@
-
 #ifndef ARRAYDEQUE_H
 #define ARRAYDEQUE_H
 
@@ -6,133 +5,126 @@ using namespace std;
 
 template <class T> class ArrayDeque {
     private:
-        int m_size, m_capacity, m_start, m_end;
-        T* m_elements;
+        int count, lowestCount, capacity;
+        T* items;
         
-        bool isFull() {
-            return m_size == m_capacity;
-        }
-    
         void increaseSizeIfNeeded(){
             if  (isFull()) {
-                int m_old_capacity = m_capacity;
-                T* newElements=new T[m_capacity*=2];
-                for (int i = 0; i < m_size; i++) {
-                    int index = m_start + i;
-                    if (index >= m_old_capacity) {
-                        index %= m_old_capacity;
-                    }
-                    int new_index = m_capacity - (m_old_capacity - index);
-                    if (index < m_start)
-                        new_index = index;
-                    newElements[new_index]=m_elements[index];
-                }
-                
-                delete[] m_elements;
-                
-                m_start = (m_capacity - 1) - m_start;
-
-                m_elements=newElements;
+                cout<<"Aumentando a capacidade do deque"<<endl;
+                T* newElements=new T[capacity*=2];
+                for (int i=0;i<size();i++) 
+                    newElements[i]=items[i];
+                delete[] items;
+                items = newElements;
             }   
         }
         
     public:
         ArrayDeque() {
-            m_capacity = 5;
-            m_size = 0;
-            m_start = 0;
-            m_end = 0;
-            m_elements=new T[m_capacity];
+            count = 0;
+            lowestCount = 0;            
+            capacity = 5;            
+            items = new T[capacity];
         }
         
         int size() {
-            return m_size;
+            return count - lowestCount;
         }
         
         bool isEmpty() {
-            return m_size == 0;
+            bool result = size() == 0;
+            if (result) {
+                cout<<"O deque esta vazio"<<endl;
+            }
+            return result;
+        }
+        
+        bool isFull() {
+            bool result = size() == capacity;
+            if (result) {
+                cout<<"O deque esta cheio"<<endl;
+            }
+            return result;
         }
         
         void pushFront(T element) {
             increaseSizeIfNeeded();
-            m_start--;
-            if (m_start < 0) {
-                m_start = m_capacity - 1;
+            if (isEmpty()) {
+                pushBack(element);
+            } else if (lowestCount > 0) {
+                lowestCount--;
+                items[lowestCount] = element; 
+            } else {
+                for (int i = count; i > 0; i--) {
+                    items[i] = items[i - 1];
+                }
+                count++;
+                items[0] = element;
             }
-            m_elements[m_start] = element;
-            m_size++;
+            printFrontBack();
         }
-
+        
         void pushBack(T element) {
             increaseSizeIfNeeded();
-            m_elements[m_end] = element;
-            m_end = (m_end + 1) % m_capacity;
-            m_size++;
+            items[count] = element;
+            count++;
+            printBackFront();
         }
         
         void popFront() {
-            if (!isEmpty()) {                
-                m_start = (m_start + 1) % m_capacity;
-                m_size--;
+            if (!isEmpty()) {
+                lowestCount++;
             }
         }
         
         void popBack() {
             if (!isEmpty()) {
-                m_end--;
-                if (m_end < 0) {
-                    m_end = m_capacity - 1;
-                }
-                m_size--;
+                count--;
             }
         }
         
         T front() {
-            return m_elements[m_start];
+            if (!isEmpty()) {
+                return items[lowestCount];
+            }
         }
         
         T back() {
-            return m_elements[m_end - 1];
+            if (!isEmpty()) {
+                return items[count - 1];
+            }
         }
         
         void printFrontBack() {
-            if (isEmpty()) {
-                cout << "Deque is empty\n"<<endl;
-            } else {
-                cout<<"\nstart:"<<m_start<<" end:"<<m_end<<" size:"<<m_size<<" capacity:"<<m_capacity<<endl;
-                cout<<"\nfront:"<<front()<<" back:"<<back()<<endl;
+            if(!isEmpty()) {
                 cout<<"\n<--------Deque front------>"<<endl;
-                
-                for (int i = 0; i < m_size; i++) {
-                    int index = m_start + i;
-                    if (index >= m_capacity)
-                        index %= m_capacity;
-                    cout<<m_elements[index]<<endl;
+                for (int i = lowestCount; i < count; i++){
+                    cout<<items[i]<<endl;
                 }
-
                 cout<<"<--------Deque back--------->"<<endl;
             }
         }
         
         void printBackFront() {
-            if (isEmpty()) {
-                cout << "Deque is empty\n"<<endl;
-            } else {
-                cout<<"\nstart:"<<m_start<<" end:"<<m_end<<" size:"<<m_size<<" capacity:"<<m_capacity<<endl;
-                cout<<"\nfront:"<<front()<<" back:"<<back()<<endl;
+            if(!isEmpty()) {
                 cout<<"\n<--------Deque back------>"<<endl;
-            
-                for(int i = 0; i < m_size; i++) {
-                    int index = (m_end - 1) - i;
-                    if (index < 0)
-                        index += m_capacity;
-                    cout<<m_elements[index]<<endl;
+                for (int i = count - 1; i >= lowestCount; i--){
+                    cout<<items[i]<<endl;
                 }
-
                 cout<<"<--------Deque front--------->"<<endl;
             }
         }
+        
+        void clear() {
+            count = 0;
+            lowestCount = 0;
+            delete[] items;
+            items = new T[capacity];
+        }
+        
+        
 };
+
 
 #endif /* ARRAYDEQUE_H */
 

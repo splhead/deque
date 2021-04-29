@@ -15,16 +15,15 @@ int main() {
     deque.pushBack(Aluno("Marco"));
     deque.pushBack(Aluno("Aline"));
     deque.pushFront(Aluno("José"));
-    //deque.pushBack(Aluno("Paulo"));
-    //deque.pushFront(Aluno("João"));
+    deque.pushBack(Aluno("Paulo"));
+    deque.pushFront(Aluno("João"));
     
-    deque.printFrontBack();
-    deque.printBackFront();
+   
     
-    deque.popFront();
-    deque.popBack();
+//    deque.popFront();
+//    deque.popBack();
     
-    deque.printFrontBack();
+    
     
 //    
 //    
