@@ -19,7 +19,7 @@ public:
         return (aluno1.getMatricula().compare(aluno2.getMatricula())==0);
     }
     friend ostream& operator<<(std::ostream &strm, const Aluno &aluno) {
-        return strm << "Aluno= "<<aluno.m_nome;
+        return strm << "Aluno = "<<aluno.m_nome;
     }
 };
 #endif /* ALUNO_H */
